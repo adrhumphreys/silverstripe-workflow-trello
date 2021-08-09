@@ -23,7 +23,16 @@ use Throwable;
 class Client
 {
     public const BOARDS = '/1/members/me/boards';
+
+    // First argument is the board ID
+    public const COLUMNS = '/1/boards/%s/lists';
+
+    public const CARDS_CREATE = '/1/cards';
+    // First argument is the card ID
+    public const CARDS_UPDATE = '/1/cards/%s';
+
     public const API_TIMEOUT = 60;
+
     private const ENV_KEY = 'TRELLO_KEY';
     private const ENV_TOKEN = 'TRELLO_TOKEN';
 

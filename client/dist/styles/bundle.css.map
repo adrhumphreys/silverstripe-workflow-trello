@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"styles/bundle.css","sourceRoot":""}
+{"version":3,"sources":["webpack:///./client/src/styles/styles.scss?8a57"],"names":[],"mappings":"AAAA,sBACE,6BACA,SACA","file":"styles/bundle.css","sourcesContent":[".workflow-widget .btn {\n  background-color: transparent;\n  border: 0;\n  padding: 0;\n}\n\n\n\n// WEBPACK FOOTER //\n// ./client/src/styles/styles.scss"],"sourceRoot":""}

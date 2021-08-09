@@ -24,9 +24,12 @@ class Request extends BaseRequest
         return json_decode($contents, true);
     }
 
-    public static function put(string $url, ?array $queryParams = null): void
+    public static function put(string $url, ?array $queryParams = null): ?array
     {
         $request = new Request('PUT', $url);
-        Client::create()->send($request, $queryParams);
+        $response = Client::create()->send($request, $queryParams);
+        $contents = $response->getBody()->getContents();
+
+        return json_decode($contents, true);
     }
 }

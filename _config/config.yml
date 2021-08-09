@@ -1,6 +1,42 @@
 ---
 Name: workflow_siteconfig_trello
+After: '#workflow_siteconfig'
 ---
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     SiteConfigTrelloExtension: SilverStripe\Workflow\Trello\SiteConfigTrelloExtension
+
+---
+Name: workflow_step_trello
+---
+SilverStripe\Workflow\Step:
+  extensions:
+    StepExtension: SilverStripe\Workflow\Trello\StepExtension
+
+SilverStripe\Workflow\StepRelation:
+  extensions:
+    TrelloStepRelationExtension: SilverStripe\Workflow\Trello\StepRelationExtension
+
+---
+Name: workflow_assets_trello
+After: '#workflow_assets'
+---
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - 'silverstripe/workflow-trello: client/dist/js/bundle.js'
+  extra_requirements_css:
+    - 'silverstripe/workflow-trello: client/dist/styles/bundle.css'
+
+---
+Name: workflow_widget_trello
+---
+SilverStripe\Workflow\WorkflowWidget:
+  extensions:
+    WorkflowWidgetExtension: SilverStripe\Workflow\Trello\WorkflowWidgetExtension
+
+---
+Name: workflow_controller_trello
+---
+SilverStripe\Workflow\WorkflowController:
+  extensions:
+    WorkflowControllerExtension: SilverStripe\Workflow\Trello\WorkflowControllerExtension

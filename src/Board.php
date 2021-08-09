@@ -3,13 +3,14 @@
 namespace SilverStripe\Workflow\Trello;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Workflow\Trello\API\Client;
-use SilverStripe\Workflow\Trello\API\Request;
+use SilverStripe\ORM\HasManyList;
+use SilverStripe\Workflow\Step;
 
 /**
  * @property string Title
  * @property string TrelloID
  * @property string TrelloURL
+ * @method Step[]|HasManyList Steps
  */
 class Board extends DataObject
 {
@@ -21,6 +22,10 @@ class Board extends DataObject
         'TrelloURL' => 'Varchar(255)',
     ];
 
+    private static array $has_many = [
+        'Steps' => Step::class,
+    ];
+
     public static function findOrCreate(string $id): Board
     {
         $board = static::get()->find('TrelloID', $id);
@@ -30,20 +35,5 @@ class Board extends DataObject
         }
 
         return $board;
-    }
-
-    public static function sync()
-    {
-        $boards = Request::get(Client::BOARDS, [
-            'fields' => 'name,url,id',
-        ]);
-
-        foreach ($boards as $board) {
-            $boardDo = Board::findOrCreate($board['id']);
-            $boardDo->Title = $board['name'];
-            $boardDo->TrelloID = $board['id'];
-            $boardDo->TrelloURL = $board['url'];
-            $boardDo->write();
-        }
     }
 }

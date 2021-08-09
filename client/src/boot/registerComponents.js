@@ -1,7 +1,12 @@
-import Injector from 'lib/Injector';
+import Injector from "lib/Injector";
+import WorkflowButton from "../components/WorkflowButton";
 
 export default () => {
-  Injector.component.registerMany({
-    // List your React components here so Injector is aware of them
+  Injector.transform("workflow-trello", (updater) => {
+    updater.component(
+      "WorkflowButton",
+      () => (props) => <WorkflowButton {...props} />,
+      "TrelloWorkflowButton"
+    );
   });
 };

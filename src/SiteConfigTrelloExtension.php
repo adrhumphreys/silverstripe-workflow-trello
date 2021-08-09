@@ -4,6 +4,8 @@ namespace SilverStripe\Workflow\Trello;
 
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_Base;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\SiteConfig\SiteConfig;
 
@@ -26,5 +28,11 @@ class SiteConfigTrelloExtension extends DataExtension
             Board::get(),
         )->setEmptyString('Select a board to sync with');
         $fields->addFieldToTab('Root.Workflow', $field);
+
+        // We want to prevent users from adding/deleting the steps now as they
+        // are managed in Trello
+        /** @var GridField $steps */
+        $steps = $fields->fieldByName('Root.Workflow.Steps');
+        $steps->setConfig(GridFieldConfig_Base::create());
     }
 }
