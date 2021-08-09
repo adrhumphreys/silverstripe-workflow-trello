@@ -1,0 +1,6 @@
+---
+Name: workflow_siteconfig_trello
+---
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    SiteConfigTrelloExtension: SilverStripe\Workflow\Trello\SiteConfigTrelloExtension
