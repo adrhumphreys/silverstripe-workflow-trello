@@ -34,4 +34,9 @@ class Cards
 
         return $card['url'] ?? $card['shortUrl'] ?? null;
     }
+
+    public static function delete($trelloID): void
+    {
+        Request::delete(sprintf(Client::CARDS_DELETE, $trelloID));
+    }
 }

@@ -32,4 +32,10 @@ class Request extends BaseRequest
 
         return json_decode($contents, true);
     }
+
+    public static function delete(string $url): void
+    {
+        $request = new Request('DELETE', $url);
+        Client::create()->send($request);
+    }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import {
     UncontrolledButtonDropdown,
@@ -6,28 +6,22 @@ import {
     DropdownItem,
     DropdownToggle,
 } from "reactstrap";
+import classNames from "classnames";
 import { inject } from "lib/Injector";
 import { sendSelectedStep } from "../helper";
-import WorkflowIcon from "./WorkflowIcon";
-
-const WorkflowStep = ({ id, title, onClick, selectedId }) => (
-    <DropdownItem onClick={onClick}>
-        {title}
-        {selectedId === id ? " selected" : " not selected"}
-    </DropdownItem>
-);
 
 const WorkflowButton = ({
     recordId,
     recordType,
     selectedStepId,
+    initialTrelloUrl = null,
     steps,
-    PopoverField,
     route,
+    WorkflowStep,
+    WorkflowIcon,
 }) => {
     const [selectedId, setSelectedId] = useState(selectedStepId);
-    const [open, setOpen] = useState(false);
-    const toggleCallback = () => setOpen(!open);
+    const [trelloUrl, setTrelloUrl] = useState(initialTrelloUrl);
 
     const selectedSteps = steps.filter((s) => s.id === selectedId);
     const selectedStep =
@@ -36,18 +30,6 @@ const WorkflowButton = ({
             : null;
     const title = selectedStep ? `${selectedStep.title}` : "Workflow";
 
-    const popoverProps = {
-        id: `workflow-widget-${recordType}-${recordId}`,
-        buttonClassName: "font-icon-tree",
-        title: title,
-        data: {
-            popoverTitle: "Edit trello workflow state",
-            buttonTooltip: "Edit trello workflow state",
-            placement: "top",
-            trigger: "focus",
-        },
-    };
-
     const createOnClick = (stepId) => () => {
         setSelectedId(stepId);
         sendSelectedStep({
@@ -55,6 +37,7 @@ const WorkflowButton = ({
             stepId,
             recordId,
             recordType,
+            setTrelloUrl,
         });
     };
 
@@ -72,16 +55,24 @@ const WorkflowButton = ({
             <UncontrolledButtonDropdown>
                 <DropdownToggle>
                     <WorkflowIcon />
+                    {title}
                     <span className="sr-only">Update workflow</span>
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem header>Header</DropdownItem>
                     {renderedSteps}
-                    <DropdownItem divider />
-                    <DropdownItem>
-                        <WorkflowIcon />
-                        Card in Trello
-                    </DropdownItem>
+                    {trelloUrl ? (
+                        <Fragment>
+                            <DropdownItem divider />
+                            <DropdownItem
+                                className="workflow-widget__item workflow-widget__item--link"
+                                target="_blank"
+                                href={trelloUrl}
+                            >
+                                <WorkflowIcon />
+                                Card in Trello
+                            </DropdownItem>
+                        </Fragment>
+                    ) : null}
                 </DropdownMenu>
             </UncontrolledButtonDropdown>
         </div>
@@ -90,4 +81,4 @@ const WorkflowButton = ({
 
 export { WorkflowButton as Component };
 
-export default inject()(WorkflowButton);
+export default inject(["WorkflowStep", "WorkflowIcon"])(WorkflowButton);

@@ -1,4 +1,10 @@
-export const sendSelectedStep = ({ route, stepId, recordId, recordType }) => {
+export const sendSelectedStep = ({
+  route,
+  stepId,
+  recordId,
+  recordType,
+  setTrelloUrl,
+}) => {
   fetch(route, {
     method: "POST",
     headers: {
@@ -15,5 +21,7 @@ export const sendSelectedStep = ({ route, stepId, recordId, recordType }) => {
       if (data.error) {
         alert(data.error);
       }
+
+      setTrelloUrl(data.trelloUrl);
     });
 };

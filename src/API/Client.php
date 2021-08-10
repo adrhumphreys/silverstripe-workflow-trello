@@ -30,6 +30,7 @@ class Client
     public const CARDS_CREATE = '/1/cards';
     // First argument is the card ID
     public const CARDS_UPDATE = '/1/cards/%s';
+    public const CARDS_DELETE = '/1/cards/%s';
 
     public const API_TIMEOUT = 60;
 
@@ -71,7 +72,7 @@ class Client
                 RequestOptions::QUERY => array_merge_recursive($queryParams ?? [], [
                     'key' => $queryParams['key'] ?? $key,
                     'token' => $queryParams['token'] ?? $token,
-                ])
+                ]),
             ]);
         } catch (Throwable $e) {
             if ($e instanceof RequestException

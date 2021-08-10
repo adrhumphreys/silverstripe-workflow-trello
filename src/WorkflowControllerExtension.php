@@ -59,7 +59,7 @@ class WorkflowControllerExtension extends Extension
 
         $response->setBody(json_encode([
             'success' => true,
-            'trello_url' => $url,
+            'trelloUrl' => $url,
         ]));
     }
 

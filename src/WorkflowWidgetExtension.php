@@ -22,6 +22,10 @@ class WorkflowWidgetExtension extends Extension
         /** @var StepRelation|StepRelationExtension $selectedStep */
         $selectedStep = StepRelation::get()->find($idField, $item->ID);
 
-        $props->setField('TrelloURL', $selectedStep->TrelloURL);
+        if (!$selectedStep) {
+            return;
+        }
+
+        $props->setField('initialTrelloUrl', $selectedStep->TrelloURL);
     }
 }
