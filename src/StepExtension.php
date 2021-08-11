@@ -2,6 +2,7 @@
 
 namespace SilverStripe\Workflow\Trello;
 
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Workflow\Step;
 
@@ -34,5 +35,13 @@ class StepExtension extends DataExtension
         }
 
         return $step;
+    }
+
+    public function updateCMSFields(FieldList $fields): void
+    {
+        $fields->removeByName([
+            'BoardID',
+            'TrelloID',
+        ]);
     }
 }

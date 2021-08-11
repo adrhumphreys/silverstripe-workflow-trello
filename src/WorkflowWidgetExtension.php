@@ -4,6 +4,7 @@ namespace SilverStripe\Workflow\Trello;
 
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Extension;
+use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\View\ArrayData;
 use SilverStripe\Workflow\StepRelation;
 use SilverStripe\Workflow\WorkflowWidget;
@@ -26,6 +27,22 @@ class WorkflowWidgetExtension extends Extension
             return;
         }
 
-        $props->setField('initialTrelloUrl', $selectedStep->TrelloURL);
+        $links = self::createTrelloLinks($selectedStep->TrelloURL);
+
+        $props->setField('links', $links);
+    }
+
+    public static function createTrelloLinks(string $url): array
+    {
+        $iconResource = ModuleResourceLoader::singleton()
+            ->resolveResource('silverstripe/workflow-trello: client/assets/trello.svg');
+
+        return [
+            [
+                'url' => $url,
+                'title' => 'View card in Trello',
+                'icon' => $iconResource->getURL(),
+            ],
+        ];
     }
 }

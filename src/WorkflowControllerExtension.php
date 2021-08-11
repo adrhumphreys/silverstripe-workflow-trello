@@ -49,7 +49,7 @@ class WorkflowControllerExtension extends Extension
         $url = null;
 
         // We don't have a card
-        if (!$relation->TrelloID|| !$relation->TrelloURL) {
+        if (!$relation->TrelloID || !$relation->TrelloURL) {
             $url = $this->createCard($record, $step->TrelloID, $editLink, $relation);
         } else {
             $url = Cards::update($relation->TrelloID, $step->TrelloID, $editLink);
@@ -59,8 +59,24 @@ class WorkflowControllerExtension extends Extension
 
         $response->setBody(json_encode([
             'success' => true,
-            'trelloUrl' => $url,
+            'links' => WorkflowWidgetExtension::createTrelloLinks($url),
         ]));
+    }
+
+    /**
+     * @param array $data
+     * @param StepRelation|StepRelationExtension|null $relation
+     */
+    public function updateGetSteps(array &$data, ?StepRelation $relation): void
+    {
+        if (!$relation) {
+            return;
+        }
+
+        $data['links'] = array_merge(
+            WorkflowWidgetExtension::createTrelloLinks($relation->TrelloURL),
+            $data['links'] ?? []
+        );
     }
 
     /**
@@ -76,7 +92,8 @@ class WorkflowControllerExtension extends Extension
         string $trelloID,
         string $editLink,
         StepRelation $relation
-    ): ?string {
+    ): ?string
+    {
         $card = Cards::create($record->Title, $trelloID, $editLink);
         $relation->TrelloID = $card['id'];
         $url = $card['url'] ?? $card['shortUrl'] ?? null;

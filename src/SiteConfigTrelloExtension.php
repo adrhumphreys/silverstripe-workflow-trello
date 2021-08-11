@@ -32,7 +32,7 @@ class SiteConfigTrelloExtension extends DataExtension
         // We want to prevent users from adding/deleting the steps now as they
         // are managed in Trello
         /** @var GridField $steps */
-        $steps = $fields->fieldByName('Root.Workflow.Steps');
-        $steps->setConfig(GridFieldConfig_Base::create());
+//        $steps = $fields->fieldByName('Root.Workflow.Steps');
+//        $steps->setConfig(GridFieldConfig_Base::create());
     }
 }

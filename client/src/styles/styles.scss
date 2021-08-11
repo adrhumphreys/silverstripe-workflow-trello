@@ -1,38 +1,38 @@
-$trelloBlue: #0079BF;
-$grey: #f1f3f6;
-$dark-grey: #566b8d;
-
-.workflow-widget .btn {
-  svg {
-    width: 20px;
-  }
-}
-
-.workflow-widget__item {
-  font-size: 1.05rem;
-  padding-left: 14px;
-  padding-right: 14px;
-  transition: color 150ms, background-color 150ms;
-
-  &.workflow-widget__item--active {
-    color: $trelloBlue;
-  }
-
-  &:hover, &:focus, &:active {
-    background-color: $trelloBlue;
-  }
-
-  &.workflow-widget__item--link {
-    align-items: center;
-    display: flex;
-
-    svg {
-      margin-right: 4px;
-    }
-
-    &:hover {
-      background-color: $grey;
-      color: $dark-grey;
-    }
-  }
-}
+//$trelloBlue: #0079BF;
+//$grey: #f1f3f6;
+//$dark-grey: #566b8d;
+//
+//.workflow-widget .btn {
+//  svg {
+//    width: 20px;
+//  }
+//}
+//
+//.workflow-widget__item {
+//  font-size: 1.05rem;
+//  padding-left: 14px;
+//  padding-right: 14px;
+//  transition: color 150ms, background-color 150ms;
+//
+//  &.workflow-widget__item--active {
+//    color: $trelloBlue;
+//  }
+//
+//  &:hover, &:focus, &:active {
+//    background-color: $trelloBlue;
+//  }
+//
+//  &.workflow-widget__item--link {
+//    align-items: center;
+//    display: flex;
+//
+//    svg {
+//      margin-right: 4px;
+//    }
+//
+//    &:hover {
+//      background-color: $grey;
+//      color: $dark-grey;
+//    }
+//  }
+//}

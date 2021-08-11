@@ -24,7 +24,8 @@
     },
     "extra": {
         "expose": [
-            "client/dist"
+            "client/dist",
+            "client/assets"
         ]
     },
     "minimum-stability": "dev",
