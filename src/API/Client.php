@@ -31,6 +31,8 @@ class Client
     // First argument is the card ID
     public const CARDS_UPDATE = '/1/cards/%s';
     public const CARDS_DELETE = '/1/cards/%s';
+    // First argument is the board ID
+    public const CARDS = '/1/boards/%s/cards';
 
     public const API_TIMEOUT = 60;
 
