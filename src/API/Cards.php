@@ -78,11 +78,14 @@ class Cards
                 continue;
             }
 
+            // The card has not been updated
             if ($stepId === $steps[$relation->StepID]) {
                 continue;
             }
 
+            // The card has changed
             $relation->StepID = $stepsInverse[$stepId] ?? 0;
+            $relation->write();
         }
     }
 
