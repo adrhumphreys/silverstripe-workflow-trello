@@ -3,6 +3,7 @@
 namespace SilverStripe\Workflow\Trello;
 
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Workflow\Step;
 
@@ -42,6 +43,18 @@ class StepExtension extends DataExtension
         $fields->removeByName([
             'BoardID',
             'TrelloID',
+            'Title',
         ]);
+
+        $fields->addFieldToTab(
+            'Root.Main',
+            ReadonlyField::create('Title'),
+            'Icon'
+        );
+    }
+
+    public function canDelete($member): bool
+    {
+        return false;
     }
 }
