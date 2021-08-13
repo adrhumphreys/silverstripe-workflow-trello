@@ -4,6 +4,7 @@ namespace SilverStripe\Workflow\Trello;
 
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Extension;
 use SilverStripe\ORM\DataObject;
@@ -44,6 +45,7 @@ class WorkflowControllerExtension extends Extension
 
         if ($record instanceof SiteTree || $record instanceof BaseElement) {
             $editLink = $record->CMSEditLink();
+            $editLink = Director::absoluteURL($editLink);
         }
 
         $url = null;
